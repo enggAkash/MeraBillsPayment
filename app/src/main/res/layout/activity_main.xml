@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/totalAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_screen_top_margin"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/total_amount_rs_1000" />
+
+    <TextView
+        android:id="@+id/paymentsTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:text="@string/payments"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalAmount" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/paymentsRv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentsTitle"
+        tools:itemCount="3" />
+
+    <TextView
+        android:id="@+id/addPaymentCta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:text="@string/add_payment"
+        android:textColor="#2096f5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentsRv" />
+
+    <TextView
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_larger"
+        android:background="@drawable/save_btn_bg"
+        android:paddingHorizontal="@dimen/save_button_horizontal_padding"
+        android:paddingVertical="@dimen/save_button_vertical_padding"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="@id/paymentsTitle"
+        app:layout_constraintStart_toStartOf="@id/paymentsTitle"
+        app:layout_constraintTop_toBottomOf="@id/addPaymentCta" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
