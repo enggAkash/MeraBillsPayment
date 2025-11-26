@@ -2,7 +2,9 @@
     <string name="app_name">MeraBills Payment</string>
     <string name="add_payment"><u>Add Payment</u></string>
     <string name="payments">Payments</string>
-    <string name="total_amount_rs_1000">Total Amount = ₹ <b>%d</b></string>
+    <string name="total_amount_rs_1000">Total Amount = ₹ <b>%s</b></string>
     <string name="save">Save</string>
     <string name="payment_description">%s  = ₹ %d</string>
+    <string name="payments_saved_successfully">Payments Saved successfully</string>
+    <string name="failed_to_save_payments">Failed to Save Payments</string>
 </resources>

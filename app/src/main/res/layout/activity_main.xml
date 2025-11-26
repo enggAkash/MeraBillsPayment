@@ -40,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/paymentsTitle"
-        tools:itemCount="3" />
+        tools:itemCount="3"
+        tools:listitem="@layout/item_payment" />
 
     <TextView
         android:id="@+id/addPaymentCta"
@@ -57,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/paymentsRv" />
 
     <TextView
-        android:id="@+id/save"
+        android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_larger"

@@ -1,5 +1,6 @@
 package com.engineerakash.merabillspayment.ui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,29 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
         return paymentList.size();
     }
 
-    private void closeIconClicked(int position) {
+    public void removePayment(int position) {
+        paymentList.remove(position);
         notifyItemRemoved(position);
-        paymentAdapterListener.onRemovePaymentClicked(position);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setList(List<Payment> payments) {
+        paymentList.clear();
+        paymentList.addAll(payments);
+        notifyDataSetChanged();
+    }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public double getTotalAmount() {
+        double totalAmount = 0.0;
+        for (int i = 0; i < paymentList.size(); i++) {
+            totalAmount += paymentList.get(i).getAmount();
+        }
+
+        return totalAmount;
     }
 
     public class PaymentViewHolder extends RecyclerView.ViewHolder {
@@ -55,7 +76,8 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
             chip.setOnCloseIconClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    closeIconClicked(getBindingAdapterPosition());
+                    removePayment(getBindingAdapterPosition());
+                    paymentAdapterListener.onRemovePaymentClicked(getBindingAdapterPosition());
                 }
             });
         }
