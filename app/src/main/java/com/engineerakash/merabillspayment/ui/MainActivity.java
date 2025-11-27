@@ -20,11 +20,11 @@ import com.engineerakash.merabillspayment.R;
 import com.engineerakash.merabillspayment.data.pojo.Payment;
 import com.engineerakash.merabillspayment.data.pojo.PaymentMode;
 import com.engineerakash.merabillspayment.utils.FileHelper;
+import com.engineerakash.merabillspayment.utils.Helper;
 import com.engineerakash.merabillspayment.utils.NumberUtil;
 import com.engineerakash.merabillspayment.utils.PaymentDialogUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
         addPaymentCta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (Helper.getRemainingPaymentMethod(paymentAdapter).isEmpty()) {
+                    //all payment method is consumed
+                    Toast.makeText(MainActivity.this, R.string.you_have_added_all_payment_method, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 PaymentDialogUtil.openAddPaymentDialog(MainActivity.this, new AddPaymentListener() {
                             @Override
                             public void onPaymentAdd(double amount, String paymentType, String provider, String reference) {
@@ -116,28 +123,13 @@ public class MainActivity extends AppCompatActivity {
                                 Payment payment = new Payment(amount, paymentMode, provider, reference);
 
                                 paymentAdapter.addPayment(payment);
+                                updateTotalAmount();
                             }
                         },
-                        getRemainingPaymentMethod()
+                        Helper.getRemainingPaymentMethod(paymentAdapter)
                 );
             }
         });
-    }
-
-    private List<String> getRemainingPaymentMethod() {
-        ArrayList<String> remainingPaymentModes = new ArrayList<>();
-        if (!paymentAdapter.hasPaymentType(CASH.getData())) {
-            remainingPaymentModes.add(CASH.getData());
-        }
-
-        if (!paymentAdapter.hasPaymentType(BANK_TRANSFER.getData())) {
-            remainingPaymentModes.add(BANK_TRANSFER.getData());
-        }
-        if (!paymentAdapter.hasPaymentType(CREDIT_CARD.getData())) {
-            remainingPaymentModes.add(CREDIT_CARD.getData());
-        }
-
-        return remainingPaymentModes;
     }
 
     private void updateTotalAmount() {
@@ -145,4 +137,5 @@ public class MainActivity extends AppCompatActivity {
 
         totalAmount.setText(getString(R.string.total_amount_rs_1000, formattedValue));
     }
+
 }

@@ -15,6 +15,7 @@ import com.engineerakash.merabillspayment.R;
 import com.engineerakash.merabillspayment.data.pojo.PaymentMode;
 import com.engineerakash.merabillspayment.ui.AddPaymentListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDialogUtil {
@@ -34,10 +35,15 @@ public class PaymentDialogUtil {
         TextView cancelBtn = (TextView) addDialogLayout.findViewById(R.id.cancelDialogBtn);
         TextView oKBtn = (TextView) addDialogLayout.findViewById(R.id.oKBtn);
 
+        ArrayList<String> modifiedRemainingPaymentOptions = new ArrayList<String>();
+        modifiedRemainingPaymentOptions.add("Select payment option");
+        modifiedRemainingPaymentOptions.addAll(remainingPaymentTypeList);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 context,
                 android.R.layout.simple_spinner_item,
-                remainingPaymentTypeList
+                modifiedRemainingPaymentOptions
+
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -48,7 +54,12 @@ public class PaymentDialogUtil {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerError.setVisibility(View.GONE);
 
-                if (remainingPaymentTypeList.get(position).equals(PaymentMode.CASH.getData())) {
+                if (position == 0) {
+                    //don't handle select payment option
+                    return;
+                }
+
+                if (modifiedRemainingPaymentOptions.get(position).equalsIgnoreCase(PaymentMode.CASH.getData())) {
                     providerEt.setVisibility(View.GONE);
                     transactionReferenceEt.setVisibility(View.GONE);
                 } else {
@@ -82,14 +93,15 @@ public class PaymentDialogUtil {
                     return;
                 }
 
-                if (paymentTypeSpinner.getSelectedItemPosition() == AdapterView.INVALID_POSITION) {
+                if (paymentTypeSpinner.getSelectedItemPosition() == AdapterView.INVALID_POSITION ||
+                        paymentTypeSpinner.getSelectedItemPosition() == 0) {
                     spinnerError.setVisibility(View.VISIBLE);
                     return;
                 }
 
                 String provider;
                 String reference;
-                if (remainingPaymentTypeList.get(paymentTypeSpinner.getSelectedItemPosition()).equals(PaymentMode.CASH.getData())) {
+                if (modifiedRemainingPaymentOptions.get(paymentTypeSpinner.getSelectedItemPosition()).equals(PaymentMode.CASH.getData())) {
                     provider = "";
                     reference = "";
                 } else {

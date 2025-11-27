@@ -70,7 +70,7 @@
         android:inputType="text"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/rupeeSymbol"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerError"
         tools:visibility="visible" />
 
@@ -83,7 +83,7 @@
         android:inputType="text"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/rupeeSymbol"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/providerEt"
         tools:visibility="visible" />
 
@@ -93,6 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/padding_small"
+        android:layout_marginTop="@dimen/padding_medium"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/padding_medium"
         android:text="CANCEL"
@@ -105,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/padding_small"
+        android:layout_marginTop="@dimen/padding_medium"
         android:background="@color/ok_btn_bg_color"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/padding_medium"
