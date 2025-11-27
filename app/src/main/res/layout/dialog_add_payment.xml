@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_medium">
+
+    <TextView
+        android:id="@+id/addPaymentTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_payment_bold"
+        android:textSize="@dimen/dialog_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rupeeSymbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_small"
+        android:text="₹"
+        android:textSize="@dimen/dialog_rupee_symbol_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/amountEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/amountEt" />
+
+    <EditText
+        android:id="@+id/amountEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:hint="Enter Amount"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rupeeSymbol"
+        app:layout_constraintTop_toBottomOf="@id/addPaymentTitle" />
+
+    <Spinner
+        android:id="@+id/paymentTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountEt"
+        tools:listitem="@layout/item_payment" />
+
+    <TextView
+        android:id="@+id/spinnerError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Please select item from spinner"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentTypeSpinner"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/providerEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:hint="Provider (ICICI, SBI etc.)"
+        android:inputType="text"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rupeeSymbol"
+        app:layout_constraintTop_toBottomOf="@id/spinnerError"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/transactionReferenceEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:hint="Transaction reference"
+        android:inputType="text"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rupeeSymbol"
+        app:layout_constraintTop_toBottomOf="@id/providerEt"
+        tools:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/cancelDialogBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/padding_small"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/padding_medium"
+        android:text="CANCEL"
+        android:textSize="@dimen/dialog_button_text_size"
+        app:layout_constraintEnd_toStartOf="@id/oKBtn"
+        app:layout_constraintTop_toBottomOf="@id/transactionReferenceEt" />
+
+    <TextView
+        android:id="@+id/oKBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/padding_small"
+        android:background="@color/ok_btn_bg_color"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/padding_medium"
+        android:text="OK"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dialog_button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transactionReferenceEt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

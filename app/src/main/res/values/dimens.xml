@@ -9,4 +9,7 @@
     <dimen name="save_button_horizontal_padding">35dp</dimen>
     <dimen name="save_button_vertical_padding">10dp</dimen>
     <dimen name="main_screen_top_margin">100dp</dimen>
+    <dimen name="dialog_button_text_size">18sp</dimen>
+    <dimen name="dialog_title_text_size">18sp</dimen>
+    <dimen name="dialog_rupee_symbol_text_size">22sp</dimen>
 </resources>

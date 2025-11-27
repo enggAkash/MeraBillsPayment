@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="chip_bg_color">#e0e0e0</color>
+    <color name="ok_btn_bg_color">#2196f5</color>
 </resources>

@@ -10,16 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.engineerakash.merabillspayment.R;
 import com.engineerakash.merabillspayment.data.pojo.Payment;
+import com.engineerakash.merabillspayment.utils.NumberUtil;
 import com.google.android.material.chip.Chip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder> {
 
-    private final List<Payment> paymentList;
+    private final ArrayList<Payment> paymentList;
     private final PaymentAdapterListener paymentAdapterListener;
 
-    PaymentAdapter(List<Payment> paymentList, PaymentAdapterListener paymentAdapterListener) {
+    PaymentAdapter(ArrayList<Payment> paymentList, PaymentAdapterListener paymentAdapterListener) {
         this.paymentList = paymentList;
         this.paymentAdapterListener = paymentAdapterListener;
     }
@@ -47,6 +49,12 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
     }
 
     @SuppressLint("NotifyDataSetChanged")
+    public void addPayment(Payment payments) {
+        paymentList.add(payments);
+        notifyItemInserted(paymentList.size());
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     public void setList(List<Payment> payments) {
         paymentList.clear();
         paymentList.addAll(payments);
@@ -64,6 +72,15 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
         }
 
         return totalAmount;
+    }
+
+    public boolean hasPaymentType(String paymentMode) {
+        for (int i = 0; i < paymentList.size(); i++) {
+            if (paymentList.get(i).getPaymentMode().getData().equalsIgnoreCase(paymentMode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public class PaymentViewHolder extends RecyclerView.ViewHolder {
@@ -85,7 +102,8 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
         public void bind(int position) {
             Payment payment = paymentList.get(position);
 
-            String paymentDescription = chip.getContext().getString(R.string.payment_description, payment.getPaymentMode().getPaymentMode(), payment.getAmount());
+            String formattedAmount = NumberUtil.upToFixDecimalIfDecimalValueIsZero(payment.getAmount());
+            String paymentDescription = chip.getContext().getString(R.string.payment_description, payment.getPaymentMode().getData(), formattedAmount);
 
             chip.setText(paymentDescription);
         }

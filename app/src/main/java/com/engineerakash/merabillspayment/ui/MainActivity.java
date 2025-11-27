@@ -1,5 +1,9 @@
 package com.engineerakash.merabillspayment.ui;
 
+import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.BANK_TRANSFER;
+import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.CASH;
+import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.CREDIT_CARD;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,10 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.engineerakash.merabillspayment.R;
+import com.engineerakash.merabillspayment.data.pojo.Payment;
+import com.engineerakash.merabillspayment.data.pojo.PaymentMode;
 import com.engineerakash.merabillspayment.utils.FileHelper;
 import com.engineerakash.merabillspayment.utils.NumberUtil;
+import com.engineerakash.merabillspayment.utils.PaymentDialogUtil;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FileHelper fileHelper;
 
-    private final PaymentAdapter paymentAdapter = new PaymentAdapter(Collections.emptyList(), position -> updateTotalAmount());
+    private final PaymentAdapter paymentAdapter = new PaymentAdapter(new ArrayList<Payment>(), position -> updateTotalAmount());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +93,51 @@ public class MainActivity extends AppCompatActivity {
         addPaymentCta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PaymentDialogUtil.openAddPaymentDialog(MainActivity.this, new AddPaymentListener() {
+                            @Override
+                            public void onPaymentAdd(double amount, String paymentType, String provider, String reference) {
+                                PaymentMode paymentMode = null;
 
+                                switch (paymentType) {
+                                    case "Cash": {
+                                        paymentMode = CASH;
+                                        break;
+                                    }
+                                    case "Bank Transfer": {
+                                        paymentMode = BANK_TRANSFER;
+                                        break;
+                                    }
+                                    case "Credit Card": {
+                                        paymentMode = CREDIT_CARD;
+                                        break;
+                                    }
+                                }
+
+                                Payment payment = new Payment(amount, paymentMode, provider, reference);
+
+                                paymentAdapter.addPayment(payment);
+                            }
+                        },
+                        getRemainingPaymentMethod()
+                );
             }
         });
+    }
+
+    private List<String> getRemainingPaymentMethod() {
+        ArrayList<String> remainingPaymentModes = new ArrayList<>();
+        if (!paymentAdapter.hasPaymentType(CASH.getData())) {
+            remainingPaymentModes.add(CASH.getData());
+        }
+
+        if (!paymentAdapter.hasPaymentType(BANK_TRANSFER.getData())) {
+            remainingPaymentModes.add(BANK_TRANSFER.getData());
+        }
+        if (!paymentAdapter.hasPaymentType(CREDIT_CARD.getData())) {
+            remainingPaymentModes.add(CREDIT_CARD.getData());
+        }
+
+        return remainingPaymentModes;
     }
 
     private void updateTotalAmount() {

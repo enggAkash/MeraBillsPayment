@@ -4,7 +4,14 @@
     <string name="payments">Payments</string>
     <string name="total_amount_rs_1000">Total Amount = ₹ <b>%s</b></string>
     <string name="save">Save</string>
-    <string name="payment_description">%s  = ₹ %d</string>
+    <string name="payment_description">%s  = ₹ %s</string>
     <string name="payments_saved_successfully">Payments Saved successfully</string>
     <string name="failed_to_save_payments">Failed to Save Payments</string>
+    <string name="add_payment_bold"><b>Add Payment</b></string>
+
+    <string-array name="payment_types">
+        <item>Cash</item>
+        <item>Bank Transfer</item>
+        <item>Credit Card</item>
+    </string-array>
 </resources>
