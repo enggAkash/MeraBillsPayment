@@ -12,4 +12,7 @@
     <dimen name="dialog_button_text_size">18sp</dimen>
     <dimen name="dialog_title_text_size">18sp</dimen>
     <dimen name="dialog_rupee_symbol_text_size">22sp</dimen>
+    <dimen name="add_payment_cta_text_size">16sp</dimen>
+    <dimen name="total_amount_title_text_size">16sp</dimen>
+    <dimen name="payment_title_text_size">16sp</dimen>
 </resources>

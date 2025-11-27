@@ -9,6 +9,11 @@
     <string name="failed_to_save_payments">Failed to Save Payments</string>
     <string name="add_payment_bold"><b>Add Payment</b></string>
     <string name="you_have_added_all_payment_method">You have added all payment method</string>
+    <string name="cancel">CANCEL</string>
+    <string name="ok">OK</string>
+    <string name="please_select_item_from_spinner">Please select item from spinner</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="rupee_symbol">₹</string>
 
     <string-array name="payment_types">
         <item>Cash</item>
