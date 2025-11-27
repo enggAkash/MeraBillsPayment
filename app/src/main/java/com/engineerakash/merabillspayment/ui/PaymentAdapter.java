@@ -51,7 +51,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
     @SuppressLint("NotifyDataSetChanged")
     public void addPayment(Payment payments) {
         paymentList.add(payments);
-        notifyItemInserted(paymentList.size());
+        notifyItemInserted(paymentList.size() - 1);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -67,16 +67,15 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
 
     public double getTotalAmount() {
         double totalAmount = 0.0;
-        for (int i = 0; i < paymentList.size(); i++) {
-            totalAmount += paymentList.get(i).getAmount();
+        for (Payment payment : paymentList) {
+            totalAmount += payment.getAmount();
         }
-
         return totalAmount;
     }
 
     public boolean hasPaymentType(String paymentMode) {
-        for (int i = 0; i < paymentList.size(); i++) {
-            if (paymentList.get(i).getPaymentMode().getData().equalsIgnoreCase(paymentMode)) {
+        for (Payment payment : paymentList) {
+            if (payment.getPaymentMode().getData().equalsIgnoreCase(paymentMode)) {
                 return true;
             }
         }

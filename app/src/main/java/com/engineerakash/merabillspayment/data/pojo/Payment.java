@@ -9,7 +9,7 @@ public class Payment {
     String transactionReference;
 
     public Payment(double amount, PaymentMode paymentMode) {
-        new Payment(amount, paymentMode, "", "");
+        this(amount, paymentMode, "", "");
     }
 
     public Payment(double amount, PaymentMode paymentMode, String provider, String transactionReference) {

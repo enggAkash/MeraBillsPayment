@@ -1,9 +1,5 @@
 package com.engineerakash.merabillspayment.ui;
 
-import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.BANK_TRANSFER;
-import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.CASH;
-import static com.engineerakash.merabillspayment.data.pojo.PaymentMode.CREDIT_CARD;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -103,22 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 PaymentDialogUtil.openAddPaymentDialog(MainActivity.this, new AddPaymentListener() {
                             @Override
                             public void onPaymentAdd(double amount, String paymentType, String provider, String reference) {
-                                PaymentMode paymentMode = null;
-
-                                switch (paymentType) {
-                                    case "Cash": {
-                                        paymentMode = CASH;
-                                        break;
-                                    }
-                                    case "Bank Transfer": {
-                                        paymentMode = BANK_TRANSFER;
-                                        break;
-                                    }
-                                    case "Credit Card": {
-                                        paymentMode = CREDIT_CARD;
-                                        break;
-                                    }
-                                }
+                                PaymentMode paymentMode = Helper.getPaymentModeFromString(paymentType);
 
                                 Payment payment = new Payment(amount, paymentMode, provider, reference);
 

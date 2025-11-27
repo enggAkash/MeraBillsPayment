@@ -59,7 +59,7 @@ public class PaymentDialogUtil {
                     return;
                 }
 
-                if (modifiedRemainingPaymentOptions.get(position).equalsIgnoreCase(PaymentMode.CASH.getData())) {
+                if (isCashPayment(modifiedRemainingPaymentOptions.get(position))) {
                     providerEt.setVisibility(View.GONE);
                     transactionReferenceEt.setVisibility(View.GONE);
                 } else {
@@ -67,6 +67,10 @@ public class PaymentDialogUtil {
                     transactionReferenceEt.setVisibility(View.VISIBLE);
                 }
 
+            }
+
+            private boolean isCashPayment(String paymentType) {
+                return paymentType.equalsIgnoreCase(PaymentMode.CASH.getData());
             }
 
             @Override
@@ -89,7 +93,7 @@ public class PaymentDialogUtil {
             public void onClick(View v) {
 
                 if (amountEt.getText().isEmpty()) {
-                    amountEt.setError("Please enter a valid amount");
+                    amountEt.setError(context.getString(R.string.please_enter_a_valid_amount));
                     return;
                 }
 
